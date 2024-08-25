@@ -2,10 +2,10 @@
 *
 * Itagaki Fumihiko 26-Jan-93  Create.
 * 1.0
-* Itagaki Fumihiko 04-Jan-94  BSS‚ª‚«‚¿‚ñ‚ÆŠm•Û‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚Ì‚ğC³
+* Itagaki Fumihiko 04-Jan-94  BSSãŒãã¡ã‚“ã¨ç¢ºä¿ã•ã‚Œã¦ã„ãªã‹ã£ãŸã®ã‚’ä¿®æ­£
 * 1.1
 *
-* Usage: wc [ -lwcCZ ] [ -- ] [ <ƒtƒ@ƒCƒ‹> | - ] ...
+* Usage: wc [ -lwcCZ ] [ -- ] [ <ãƒ•ã‚¡ã‚¤ãƒ«> | - ] ...
 
 .include doscall.h
 .include chrcode.h
@@ -36,9 +36,9 @@ start:
 		bra	start1
 		dc.b	'#HUPAIR',0
 start1:
-		lea	bsstop(pc),a6			*  A6 := BSS‚Ìæ“ªƒAƒhƒŒƒX
-		lea	stack_bottom(a6),a7		*  A7 := ƒXƒ^ƒbƒN‚Ì’ê
-		lea	$10(a0),a0			*  A0 : PDBƒAƒhƒŒƒX
+		lea	bsstop(pc),a6			*  A6 := BSSã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		lea	stack_bottom(a6),a7		*  A7 := ã‚¹ã‚¿ãƒƒã‚¯ã®åº•
+		lea	$10(a0),a0			*  A0 : PDBã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a7,d0
 		sub.l	a0,d0
 		move.l	d0,-(a7)
@@ -46,22 +46,22 @@ start1:
 		DOS	_SETBLOCK
 		addq.l	#8,a7
 	*
-	*  ˆø”•À‚ÑŠi”[ƒGƒŠƒA‚ğŠm•Û‚·‚é
+	*  å¼•æ•°ä¸¦ã³æ ¼ç´ã‚¨ãƒªã‚¢ã‚’ç¢ºä¿ã™ã‚‹
 	*
-		lea	1(a2),a0			*  A0 := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ìæ“ªƒAƒhƒŒƒX
-		bsr	strlen				*  D0.L := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ì’·‚³
+		lea	1(a2),a0			*  A0 := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		bsr	strlen				*  D0.L := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®é•·ã•
 		addq.l	#1,d0
 		bsr	malloc
 		bmi	insufficient_memory
 
-		movea.l	d0,a1				*  A1 := ˆø”•À‚ÑŠi”[ƒGƒŠƒA‚Ìæ“ªƒAƒhƒŒƒX
+		movea.l	d0,a1				*  A1 := å¼•æ•°ä¸¦ã³æ ¼ç´ã‚¨ãƒªã‚¢ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 	*
-	*  ˆø”‚ğƒfƒR[ƒh‚µC‰ğß‚·‚é
+	*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã—ï¼Œè§£é‡ˆã™ã‚‹
 	*
-		bsr	DecodeHUPAIR			*  ˆø”‚ğƒfƒR[ƒh‚·‚é
-		movea.l	a1,a0				*  A0 : ˆø”ƒ|ƒCƒ“ƒ^
-		move.l	d0,d7				*  D7.L : ˆø”ƒJƒEƒ“ƒ^
-		moveq	#0,d5				*  D5.L : ƒtƒ‰ƒO
+		bsr	DecodeHUPAIR			*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹
+		movea.l	a1,a0				*  A0 : å¼•æ•°ãƒã‚¤ãƒ³ã‚¿
+		move.l	d0,d7				*  D7.L : å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
+		moveq	#0,d5				*  D5.L : ãƒ•ãƒ©ã‚°
 decode_opt_loop1:
 		tst.l	d7
 		beq	decode_opt_done
@@ -138,7 +138,7 @@ decode_opt_done:
 		or.b	#7,d5				*  -lwc
 option_ok:
 	*
-	*  “ü—Íƒoƒbƒtƒ@‚ğŠm•Û‚·‚é
+	*  å…¥åŠ›ãƒãƒƒãƒ•ã‚¡ã‚’ç¢ºä¿ã™ã‚‹
 	*
 		move.l	#$00ffffff,d0
 		bsr	malloc
@@ -149,9 +149,9 @@ option_ok:
 
 		move.l	d0,inpbuf_top(a6)
 	*
-	*  ŠJn
+	*  é–‹å§‹
 	*
-		moveq	#0,d6				*  D6.W : ƒGƒ‰[EƒR[ƒh
+		moveq	#0,d6				*  D6.W : ã‚¨ãƒ©ãƒ¼ãƒ»ã‚³ãƒ¼ãƒ‰
 		tst.l	d7
 		bne	for_file_start
 
@@ -267,7 +267,7 @@ do_file_loop:
 		move.l	d0,d3
 		bmi	do_file_read_fail
 .if 0
-		beq	do_file_done	* i‚±‚±‚ÅI‚í‚ç‚È‚­‚Ä‚à‰º‚ÅI‚í‚Á‚Ä‚­‚ê‚éj
+		beq	do_file_done	* ï¼ˆã“ã“ã§çµ‚ã‚ã‚‰ãªãã¦ã‚‚ä¸‹ã§çµ‚ã‚ã£ã¦ãã‚Œã‚‹ï¼‰
 .endif
 
 		sf	d4				* D4.B : EOF flag
@@ -480,12 +480,12 @@ werror_1:
 	dc.b	'## wc 1.1 ##  Copyright(C)1993-94 by Itagaki Fumihiko',0
 
 msg_myname:		dc.b	'wc: ',0
-msg_no_memory:		dc.b	'ƒƒ‚ƒŠ‚ª‘«‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_open_fail:		dc.b	': ƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ',CR,LF,0
-msg_read_fail:		dc.b	': “ü—ÍƒGƒ‰[',CR,LF,0
-msg_illegal_option:	dc.b	'•s³‚ÈƒIƒvƒVƒ‡ƒ“ -- ',0
-msg_usage:		dc.b	CR,LF,'g—p–@:  wc [-lwcCZ] [--] [<ƒtƒ@ƒCƒ‹>] ...',CR,LF,0
-word_total:		dc.b	'‡Œv',0
+msg_no_memory:		dc.b	'ãƒ¡ãƒ¢ãƒªãŒè¶³ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_open_fail:		dc.b	': ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“',CR,LF,0
+msg_read_fail:		dc.b	': å…¥åŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_illegal_option:	dc.b	'ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- ',0
+msg_usage:		dc.b	CR,LF,'ä½¿ç”¨æ³•:  wc [-lwcCZ] [--] [<ãƒ•ã‚¡ã‚¤ãƒ«>] ...',CR,LF,0
+word_total:		dc.b	'åˆè¨ˆ',0
 str_stdin:		dc.b	'-'
 str_nul:		dc.b	0
 *****************************************************************
